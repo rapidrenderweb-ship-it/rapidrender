@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RapidRender Web | Premium Web Design & Development</title>
+    <style>
+        /* Sleek Reset & Core Variables */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        :root {
+            --bg-dark: #0b0f19;
+            --bg-card: #131a26;
+            --accent-neon: #00ffcc;
+            --accent-purple: #7000ff;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Clean Navigation Header */
+        header {
+            background-color: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            padding: 1.25rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .brand-logo span {
+            color: var(--accent-neon);
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-neon);
+        }
+
+        /* Minimal Stark Hero Section */
+        .hero {
+            min-height: 90vh;
+            padding: 0 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--text-muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content h1 span {
+            background: linear-gradient(135deg, var(--accent-neon) 0%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-image-pane {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image-pane img {
+            width: 100%;
+            max-width: 520px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 50px rgba(0, 255, 204, 0.1);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .cta-action {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-neon) 0%, #00d4aa 100%);
+            color: #000;
+            padding: 0.9rem 2.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 255, 204, 0.3);
+        }
+
+        /* Section Universal Layout */
+        section {
+            padding: 7rem 8% 5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Sleek Tiered Pricing Architecture */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .price-card {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .price-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 204, 0.2);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Highlight the middle/Standard card */
+        .price-card.featured {
+            border: 1px solid rgba(112, 0, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(112, 0, 255, 0.15);
+        }
+        
+        .price-card.featured::top {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-purple);
+            color: #fff;
+            padding: 0.25rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 20px;
+            letter-spacing: 1px;
+        }
+
+        .tier-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .featured .tier-name {
+            color: var(--accent-neon);
+        }
+
+        .tier-price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .tier-price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-left: 0.25rem;
+        }
+
+        .tier-features {
+            list-style: none;
+            margin-bottom: 3rem;
+            flex-grow: 1;
+        }
+
+        .tier-features li {
+            margin-bottom: 0.85rem;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+
+        .tier-features li::before {
+            content: "✓";
+            color: var(--accent-neon);
+            font-weight: 900;
+            margin-right: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .card-btn {
+            display: block;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            padding: 0.85rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s, color 0.3s;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .price-card:hover .card-btn {
+            background-color: var(--text-main);
+            color: #000;
+        }
+
+        .featured .card-btn {
+            background: linear-gradient(135deg, var(--accent-purple) 0%, #5000b8 100%);
+            border: none;
+        }
+
+        .featured:hover .card-btn {
+            background: var(--accent-neon);
+            color: #000;
+        }
+
+        /* Clean Functional Contact Block */
+        .contact-wrap {
+            max-width: 650px;
+            margin: 0 auto;
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            padding: 3.5rem;
+            border-radius: 16px;
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .field-box {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field-box label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .field-box input, .field-box textarea, .field-box select {
+            background-color: var(--bg-dark);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.9rem;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .field-box input:focus, .field-box textarea:focus, .field-box select:focus {
+            outline: none;
+            border-color: var(--accent-neon);
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, var(--accent-neon) 0%, var(--accent-purple) 100%);
+            color: #fff;
+            font-weight: 700;
+            border: none;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .send-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Tech Minimalist Footer */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            font-size: 0.85rem;
+            color: #475569;
+            border-top: 1px solid rgba(255,255,255,0.02);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 968px) {
+            .hero { flex-direction: column; text-align: center; justify-content: center; padding-top: 4rem; }
+            .hero-content h1 { font-size: 2.8rem; }
+            .input-row { grid-template-columns: 1fr; gap: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <a href="#" class="brand-logo">RapidRender<span>Web</span></a>
+        <nav>
+            <a href="#packages">Our Packages</a>
+            <a href="#start">Launch Project</a>
+        </nav>
+    </header>
+
+    <!-- Hero Showcase Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>High-Performance Websites, Built at <span>Lightning Speed</span>.</h1>
+            <p>We craft clean, sleek, and responsive modern user experiences engineered specifically to turn local visitors into high-paying customers.</p>
+            <a href="#packages" class="cta-action">Explore Packages</a>
+        </div>
+        <div class="hero-image-pane">
+            <!-- Sleek stock graphic framing a tech workspace presentation -->
+            <img src="https://miro.medium.com/v2/resize:fit:2000/1*VQCT6ZjyYYh8h376rullfw.png" alt="Sleek dark-themed UI dashboard representing high end software development layout assets">
+        </div>
+    </section>
+
+    <!-- Pricing Grid Matrix -->
+    <section id="packages">
+        <div class="section-header">
+            <h2>Straightforward Tiered Pricing</h2>
+            <p>No hidden fees. Select the strategic scope that lines up with your exact scaling demands.</p>
+        </div>
+
+        <div class="pricing-grid">
+            
+            <!-- Basic Package -->
+            <div class="price-card">
+                <div class="tier-name">Basic Plan</div>
+                <div class="tier-price">R300<span>/ total</span></div>
+                <ul class="tier-features">
+                    <li><strong>1 to 3 Pages</strong> custom design</li>
+                    <li>Perfect for local landing pages</li>
+                    <li>Sleek, responsive mobile layout</li>
+                    <li>Integrated contact call-to-action</li>
+                    <li>Standard SEO tags setup</li>
+                </ul>
+                <a href="#start" class="card-btn">Select Basic</a>
+            </div>
+
+            <!-- Standard Package (Featured) -->
+            <div class="price-card featured">
+                <div class="tier-name">Standard Framework</div>
+                <div class="tier-price">R500<span>/ total</span></div>
+                <ul class="tier-features">
+                    <li><strong>4 to 7 Pages</strong> deep architecture</li>
+                    <li>Ideal for growing businesses</li>
+                    <li>Advanced UI layout components</li>
+                    <li>Interactive contact/booking maps</li>
+                    <li>Social media link integrations</li>
+                    <li>Full speed performance tweaks</li>
+                </ul>
+                <a href="#start" class="card-btn">Select Standard</a>
+            </div>
+
+            <!-- Deluxe Package -->
+            <div class="price-card">
+                <div class="tier-name">Deluxe Engine</div>
+                <div class="tier-price">R1000<span>/ total</span></div>
+                <ul class="tier-features">
+                    <li><strong>8 to 15 Pages</strong> complete ecosystem</li>
+                    <li>Custom structural content hubs</li>
+                    <li>Advanced multi-tiered filtering layout</li>
+                    <li>Priority deployment pipeline</li>
+                    <li>Fully optimized speed configurations</li>
+                    <li>30-Days maintenance engineering</li>
+                </ul>
+                <a href="#start" class="card-btn">Select Deluxe</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Modern Order Form Entry Point -->
+    <section id="start" style="background-color: #080b12;">
+        <div class="section-header">
+            <h2>Initiate Your Build</h2>
+            <p>Fill out the strategic scope blueprint below to launch your high-conversion platform.</p>
+        </div>
+
+        <div class="contact-wrap">
+            <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Inquiry processed! This is a dynamic visual template mockup for RapidRender Web.');">
+                <div class="input-row">
+                    <div class="field-box">
+                        <label for="client-name">Your Name</label>
+                        <input type="text" id="client-name" required placeholder="e.g. Sipho Khumalo">
+                    </div>
+                    <div class="field-box">
+                        <label for="client-biz">Business Title</label>
+                        <input type="text" id="client-biz" required placeholder="e.g. Elite Logistics">
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="field-box">
+                        <label for="client-phone">Phone Line</label>
+                        <input type="tel" id="client-phone" required placeholder="e.g. 011 789 1234">
+                    </div>
+                    <div class="field-box">
+                        <label for="package-select">Selected Tier Blueprint</label>
+                        <select id="package-select">
+                            <option value="basic">Basic Architecture Layout — R300</option>
+                            <option value="standard" selected>Standard Premium Framework — R500</option>
+                            <option value="deluxe">Deluxe Engine Ecosystem — R1000</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field-box">
+                    <label for="project-notes">Core Aesthetic / Layout Goals</label>
+                    <textarea id="project-notes" rows="4" placeholder="Briefly outline your design references or industry niche..."></textarea>
+                </div>
+                <button type="submit" class="send-btn">Deploy RapidRender Request</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer Meta Layout -->
+    <footer>
+        <p>&copy; 2026 RapidRender Web. Formulated for high-impact visual performance.</p>
+    </footer>
+
+</body>
+</html>
